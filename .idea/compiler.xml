@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="pos.base" target="21" />
+      <module name="pos.core" target="21" />
+      <module name="pos.core-db" target="21" />
+      <module name="pos.core-models" target="21" />
+      <module name="pos.core-network" target="21" />
+      <module name="pos.core-payment" target="21" />
+      <module name="pos.core-print" target="21" />
+      <module name="pos.inventory" target="21" />
+      <module name="pos.orders" target="21" />
+      <module name="pos.payments" target="21" />
+      <module name="pos.sync" target="21" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
