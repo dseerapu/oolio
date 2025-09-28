@@ -10,6 +10,7 @@ import com.oolio.pos.data.db.entities.Order
 import com.oolio.pos.data.db.entities.OrderItem
 import com.oolio.pos.data.db.entities.PrintJob
 import com.oolio.pos.data.db.entities.PrintStatus
+import com.oolio.pos.data.db.entities.PrintType
 import javax.inject.Singleton
 
 @Singleton
@@ -36,7 +37,7 @@ class OrderOfflineDataSource(
 
             val printJob = PrintJob(
                 id = order.id,
-                type = "order",
+                type = PrintType.KITCHEN,
                 payloadJson = order.toString(),
                 printerId = "printer123",
                 status = PrintStatus.PENDING,
