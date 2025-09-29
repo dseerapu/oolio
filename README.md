@@ -31,6 +31,7 @@ It is built with
 * Coroutines for Async Programming
 
 ### Architecture
+![architecutre][docs/pos.png]
 * Data Layer : Handles data insertion, fetching, and event triggering
 * PrintQueueManager: Processing all print jobs, handles retries, and printer availability
 * WorkManager: Handles background tasks such as sync, fetch, print, and data retention.
