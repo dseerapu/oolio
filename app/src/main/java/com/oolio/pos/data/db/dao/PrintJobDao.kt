@@ -42,4 +42,13 @@ interface PrintJobDao {
     @Query("UPDATE print_jobs SET status = :status WHERE id = :id")
     suspend fun updatePrintJobStatus(id: String, status: PrintStatus)
 
+    @Query("DELETE FROM print_jobs WHERE status = 'COMPLETED' AND createdAt < :cutoff")
+    suspend fun deleteOldCompleted(cutoff: Long)
+
+    @Query("DELETE FROM print_jobs WHERE status = 'FAILED' AND createdAt < :cutoff")
+    suspend fun deleteOldFailed(cutoff: Long)
+
+    @Query("DELETE FROM print_jobs WHERE id = :id")
+    suspend fun deletePrintJob(id: String)
+
 }

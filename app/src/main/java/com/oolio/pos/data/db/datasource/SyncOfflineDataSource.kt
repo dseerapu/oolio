@@ -1,6 +1,5 @@
 package com.oolio.pos.data.db.datasource
 
-import com.google.gson.Gson
 import com.oolio.pos.data.db.POSDatabase
 import com.oolio.pos.data.db.UnitOfWork
 import com.oolio.pos.data.db.entities.ChangeRecord
@@ -12,8 +11,7 @@ import javax.inject.Singleton
 
 @Singleton
 class SyncOfflineDataSource @Inject constructor(
-    private val db: POSDatabase,
-    private val unitOfWork: UnitOfWork
+    private val db: POSDatabase
 ) {
     suspend fun getPendingChanges(): List<ChangeRecord> =
         db.changeRecordDao().getChangeRecordsByStatus(ChangeRecordStatus.PENDING)
@@ -25,12 +23,12 @@ class SyncOfflineDataSource @Inject constructor(
         db.inventoryDao().upsertInventory(inventory)
 
     suspend fun markChangeSuccess(change: ChangeRecord) =
-        db.changeRecordDao().upsertChangeRecord(change.copy(status = "SUCCESS"))
+        db.changeRecordDao().upsertChangeRecord(change.copy(status = ChangeRecordStatus.SUCCESS))
 
     suspend fun markChangeFailed(change: ChangeRecord) {
         db.changeRecordDao().upsertChangeRecord(
             change.copy(
-                status = "FAILED",
+                status = ChangeRecordStatus.FAILED,
                 attempts = change.attempts + 1,
                 lastAttemptedAt = System.currentTimeMillis()
             )

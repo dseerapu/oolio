@@ -18,13 +18,14 @@ class PushSyncWorker @AssistedInject constructor(
     override suspend fun doWork(): Result {
         return try {
            val pendingChanges =  syncRepository.getPendingChanges()
-
-            pendingChanges.forEach { change->
-                try {
-                    syncRepository.pushChange(change)
-                    syncRepository.markChangeSuccess(change)
-                }catch (e: Exception){
-                    syncRepository.markChangeFailed(change)
+            pendingChanges.chunked(20).forEach { batch ->
+                batch.forEach { change ->
+                    try {
+                        syncRepository.pushChange(change)
+                        syncRepository.markChangeSuccess(change)
+                    } catch (e: Exception) {
+                        syncRepository.markChangeFailed(change)
+                    }
                 }
             }
 

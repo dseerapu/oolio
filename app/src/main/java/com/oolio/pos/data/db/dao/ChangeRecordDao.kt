@@ -23,4 +23,7 @@ interface ChangeRecordDao {
     @Query("SELECT * FROM change_records WHERE status = :status")
     suspend fun getChangeRecordsByStatus(status: ChangeRecordStatus): List<ChangeRecord>
 
+    @Query("DELETE FROM change_records WHERE status = 'SUCCESS' AND createdAt < :cutoff")
+    suspend fun deleteOldSuccess(cutoff: Long)
+
 }

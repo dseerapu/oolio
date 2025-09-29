@@ -12,7 +12,7 @@ data class ChangeRecord(
     val deviceId: String,
     val clientId : String,
     val clientTs : Long,
-    val status: String,
+    val status: ChangeRecordStatus,
     val attempts: Int,
     val lastAttemptedAt: Long,
     val createdAt: Long,
